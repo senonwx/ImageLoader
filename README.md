@@ -1,9 +1,9 @@
 # ImageLoader
 ImageLoader图片加载模块，采用策略模式及构建者模式。
 
-<img src="https://github.com/senonwx/ImageLoad/blob/master/glide_screen.gif" width="50%"><img/><br/>
+<img src="/glide_screen.gif" width="50%"><img/><br/>
 Glide使用</br>
-<img src="https://github.com/senonwx/ImageLoad/blob/master/picasso_screen.gif" width="50%"><img/><br/>
+<img src="/picasso_screen.gif" width="50%"><img/><br/>
 Picasso使用</br>
 
 * 使用方法
