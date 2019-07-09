@@ -26,4 +26,4 @@ Picasso使用</br>
          .into(imageView)
          .build());
 ```
-* 更多使用方法参考类[ImageLoadConfiguration]()
+* 更多使用方法参考类[ImageLoadConfiguration](/library/src/main/java/com/senon/library/ImageLoadConfiguration.java)
