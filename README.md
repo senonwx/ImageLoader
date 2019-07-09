@@ -1,10 +1,11 @@
 # ImageLoader
 ImageLoader图片加载模块，采用策略模式及构建者模式。
 
-<img src="/glide_screen.gif" width="70%"><img/><br/>
 Glide使用</br>
-<img src="/picasso_screen.gif" width="70%"><img/><br/>
+<img src="/glide_screen.gif" width="70%"><img/><br/>
 Picasso使用</br>
+<img src="/picasso_screen.gif" width="70%"><img/><br/>
+
 
 * 使用方法
 ```
