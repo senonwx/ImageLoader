@@ -7,12 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.senon.library.ImageLoadConfiguration;
 import com.senon.library.ImageLoadProxy;
 import com.squareup.picasso.Picasso;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -23,12 +23,27 @@ import jp.wasabeef.glide.transformations.MaskTransformation;
 import jp.wasabeef.glide.transformations.gpu.KuwaharaFilterTransformation;
 import jp.wasabeef.glide.transformations.gpu.ToonFilterTransformation;
 
-
+/**
+ * gif
+ * picasso加载的gif图是静态的 这一点glide显得更优秀
+ * 库的大小
+ * Picasso的大小大约是118KB，而Glide大约有430KB。
+ * 方法数量
+ * Picasso的大小大约是500左右，而Glide大约有2700左右。
+ * 加载速度
+ * 默认情况Picasso慢，Glide快。
+ * 清晰度
+ * 默认情况Picasso好，Glide稍差。
+ *
+ * https://blog.csdn.net/u011200604/article/details/53021685
+ */
 
 public class MainActivity extends AppCompatActivity {
     private String url = "https://p5.ssl.qhimgs1.com/sdr/400__/t017adbb090d352381b.gif";
     private String url2 = "http://imgsrc.baidu.com/baike/pic/item/7aec54e736d12f2ee289bffe4cc2d5628435689b.jpg";
     private ImageView image,image2,image3,igv,igv2,igv3;
+    private TextView tv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +57,13 @@ public class MainActivity extends AppCompatActivity {
         igv = findViewById(R.id.igv);
         igv2 = findViewById(R.id.igv2);
         igv3 = findViewById(R.id.igv3);
+        tv = findViewById(R.id.tv);
 
 
         initBaseView();
 
         /**
-         * 要使用不同的位图转换  在library build.gradle切换不同的GPU Filters
+         * 要使用不同的位图转换（Glide\Picasso7）  在library build.gradle切换不同的GPU Filters
          */
         // 初始化图片加载模块
         ImageLoadProxy.getInstance().init(ImageLoadProxy.IMAGE_LOAD_GLIDE);
@@ -66,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadByGlide() {
+        tv.setText("Glide\n"+tv.getText().toString());
         ImageLoadProxy.getInstance().load(new ImageLoadConfiguration.Builder(this)
                 .load(url)
                 .asGif()
@@ -89,13 +106,16 @@ public class MainActivity extends AppCompatActivity {
                 .into(igv3)
                 .transformationsGlide(new GrayscaleTransformation(),new ToonFilterTransformation(0.2F, 10F))
                 .build());
+
     }
 
 
     private void loadByPicasso() {
+        tv.setText("Picasso\n"+tv.getText().toString());
         ImageLoadProxy.getInstance().load(new ImageLoadConfiguration.Builder(this)
                 .load(R.drawable.testigv)
                 .transformationsPicasso(new jp.wasabeef.picasso.transformations.gpu.SepiaFilterTransformation(this,1.0F),
+                        new jp.wasabeef.picasso.transformations.gpu.KuwaharaFilterTransformation(this,10),
                         new jp.wasabeef.picasso.transformations.CropCircleTransformation())
                 .imageWidth(400)
                 .imageHeight(400)
